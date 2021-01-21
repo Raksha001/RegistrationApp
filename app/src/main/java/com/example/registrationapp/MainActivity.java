@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     EditText name,roll,mobile,dob,blood;
     TextView yr,dept;
     RadioGroup gender;
-    String s,ss;
+    String s,ss,s2;
     CheckBox tc;
     MediaPlayer m;
 
@@ -89,25 +89,31 @@ public class MainActivity extends AppCompatActivity {
 
                 int i = gender.getCheckedRadioButtonId();
                 switch (i){
-                    case R.id.radioButton:
-                        ss="male";
-                        break;
 
                     case R.id.radioButton2:
                         ss="female";
+                        break;
+
+                    case R.id.radioButton:
+                        ss="male";
                         break;
                 }
 
                 boolean st = tc.isChecked();
                 if (st){
-                    s=name.getText().toString() + "\n" + roll.getText().toString() + "\n"+ mobile.getText().toString()+ "\n"+yr.getText().toString() + "\n" + dept.getText().toString() + "\n"+ blood.getText().toString()  + "\n" ;
+                    String yr = sp.getSelectedItem().toString();
+                    String dept = sp1.getSelectedItem().toString();
+
+                    s="NAME:"+ "\t" + name.getText().toString() + "\n" + "ROLL NUM:"+ "\t"+roll.getText().toString()  +"\n"+ "PHONE NUM:"+ "\t"+ mobile.getText().toString() + "\n" + "YEAR:"+ "\t"+yr +"\n" +"DOB:"+ "\t"+dob.getText().toString() +"\n"+ "DEPT:"+ "\t"+ dept + "\n"+ "BLOOD GROUP:"+ "\t"+ blood.getText().toString()  + "\n" + "GENDER:"+ "\t"+ ss;
+                    s2 = mobile.getText().toString();
                     Intent an = new Intent(MainActivity.this,DataDisplay.class);
                     an.putExtra("abc",s);
+                    an.putExtra("key",s2);
                     startActivity(an);
-                    Toast.makeText(MainActivity.this, "Next page Activated!" +"\n"+s+"\n"+s, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Information Submitted!", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "Agree Terms and Condition!" +"\n"+s+"\n"+s, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Agree Terms and Condition!" , Toast.LENGTH_SHORT).show();
                     new AlertDialog.Builder(MainActivity.this)//for alert message
                             .setTitle("Alert!")
                             .setMessage("Agree Terms and Condition!")
